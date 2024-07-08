@@ -1,0 +1,46 @@
+CMTools2.0/
+├── wwwroot/                 # Statisk webbinnehåll (CSS, JS, bilder)
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── Pages/                   # Blazor-komponenter och sidor
+│   ├── ComputerPages/
+│   │   ├── Computer.razor   # HTML och Razor
+│   │   └── Computer.razor.cs # C#-kod bakom
+│   ├── OtherPage/
+│   │   ├── Other.razor
+│   │   └── Other.razor.cs
+│   ├── _Host.cshtml
+│   └── _Imports.razor
+├── Shared/                  # Delade komponenter, layout och navmenyer
+│   ├── MainLayout.razor
+│   ├── NavMenu.razor
+│   ├── NavMenu.razor.cs
+│   ├── SurveyPrompt.razor
+│   └── SurveyPrompt.razor.cs
+├── Data/                    # Data access och service klasser
+│   ├── ApplicationDbContext.cs
+│   ├── WeatherForecastService.cs
+│   └── IWeatherForecastService.cs
+├── Models/                  # Modelklasser
+│   ├── Computer.cs
+│   ├── User.cs
+│   └── WeatherForecast.cs
+├── Services/                # Applikationsspecifika tjänster
+│   ├── ComputerService.cs
+│   └── UserService.cs
+├── App.razor                # Rotkomponenten
+├── Program.cs               # Programfilen som startar applikationen
+├── _Imports.razor           # Globala using-direktiv
+├── CMTools2.0.csproj        # Projektfilen
+└── appsettings.json         # Konfigurationsfil
+
+Riktlinjer för Organisation
+Separation av logik och presentation: Håll HTML och C# separerade för bättre läsbarhet och underhåll.
+Namngivning: Följ en konsekvent namngivningskonvention för filer och mappar.
+Modularisering: Organisera sidor och komponenter i separata mappar för att minska röran och öka läsbarheten.
+Shared Components: Lägg gemensamma komponenter i Shared-mappen för att undvika duplicering av kod.
+Services och Data Access: Håll dataåtkomst och tjänster separat i Data och Services-mapparna.
+Models: Definiera dina dataobjekt och modeller i en separat Models-mapp.
+wwwroot: Använd wwwroot-mappen för att lagra statiska resurser som CSS, JS och bilder.
+Denna struktur gör det lättare att underhålla och skala applikationen, samt förbättrar läsbarheten och separationen av ansvar. Genom att följa dessa riktlinjer kan ni säkerställa att projektet är välorganiserat och lätt att navigera för alla utvecklare som deltar i arbetet.

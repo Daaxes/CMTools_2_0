@@ -1,0 +1,57 @@
+﻿@rendermode RenderMode.InteractiveServer
+@inherits LayoutComponentBase
+@inject ILayoutConfig LayoutConfig
+@inject LayoutStyleConfig StyleConfig
+@inject IJSRuntime JSRuntime
+@using CMTools_2_0.Shared.Layout
+@using LayoutLibrary.Models
+@using LayoutLibrary.Shared.Layout
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="topbar">
+        <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About us</a>
+    </div>
+
+    <main class="content">
+        @Body
+    </main>
+
+    <div class="footer">
+        <!-- Innehåll för footer -->
+    </div>
+</div>
+
+<div id="blazor-error-ui">
+@*      An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+ *@
+</div>
+
+@code {
+    private string SidebarWidth => LayoutConfig.Sidebar.Width;
+    private string SidebarBackground => string.IsNullOrEmpty(LayoutConfig.Sidebar.EndColor)
+        ? LayoutConfig.Sidebar.StartColor
+        : $"linear-gradient({LayoutConfig.Sidebar.StartColor}, {LayoutConfig.Sidebar.EndColor})";
+
+    private string TopbarHeight => LayoutConfig.Topbar.Height;
+    private string TopbarBackground => LayoutConfig.Topbar.BackgroundColor;
+
+    private bool ShowSidebar => LayoutConfig.Sidebar.Visible;
+    private bool ShowTopbar => LayoutConfig.Topbar.Visible;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var css = StyleConfig.InitializeStyleConfig();
+            await JSRuntime.InvokeVoidAsync("eval", $"var style = document.createElement('style'); style.innerHTML = `{css}`; document.head.appendChild(style);");
+        }
+    }
+}
